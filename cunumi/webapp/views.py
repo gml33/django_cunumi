@@ -3,6 +3,7 @@ from .forms import CreateUserForm, LoginForm
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
+from .bot import bot, chat_id
 
 def home(request):
     return render(request, 'webapp/index.html')
@@ -29,6 +30,7 @@ def my_login(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 auth.login(request, user)
+                #bot.send_message(chat_id, text='Logueado')
                 return redirect('dashboard')
     context = {'form':form}
     return render(request, 'webapp/my-login.html', context=context)
