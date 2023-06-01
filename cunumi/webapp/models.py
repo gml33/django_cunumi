@@ -33,6 +33,7 @@ class paciente(models.Model):
         ('derivado', 'derivado')
     )
     estado = models.CharField(max_length=20, choices=estado_choices, default='activo')
+    profesional_responsable = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
@@ -43,6 +44,7 @@ class historiaClinica(models.Model):
         paciente, on_delete=models.CASCADE, blank=True)
     fecha = models.DateField(blank=True)
     detalle = models.TextField(blank=True)
+    profesional_responsable = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
 
     def __str__(self):
         return f"{self.paciente} - {self.fecha}"
@@ -53,6 +55,7 @@ class evolucion(models.Model):
         paciente, on_delete=models.CASCADE, blank=True)
     fecha = models.DateField(blank=True, null=True)
     detalle = models.TextField(blank=True)
+    profesional_responsable = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
 
     def __str__(self):
         return f"{self.paciente} - {self.fecha}"
@@ -65,6 +68,16 @@ class derivacion(models.Model):
     motivo = models.TextField(blank=True)
     detalle = models.TextField(blank=True)
     profesional = models.CharField(max_length=200, blank=True)
+    profesional_responsable = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+
+class factura(models.Model):
+    paciente = models.ForeignKey(paciente, on_delete=models.CASCADE, blank=True)
+    fecha = models.DateField(blank=True, null=True)
+    monto = models.IntegerField(blank=True)
+    numero = models.IntegerField(blank=True)
+
+    def __str__(self):
+        return f"{self.numero} - {self.fecha}"
 
 
 class pago(models.Model):
@@ -83,18 +96,28 @@ class pago(models.Model):
         ('saldado', 'saldado')
     )
     estado = models.CharField(max_length=20, choices=estado_choices, default='pendiente')
+    factura = models.ForeignKey(factura, on_delete=models.CASCADE, blank=True)
+
+    def __str__(self):
+        return f"{self.paciente} - {self.fecha} - ${self.monto}"
 
 class turno(models.Model):
     paciente = models.ForeignKey(paciente, on_delete=models.CASCADE, blank=False)
     fecha = models.DateField(blank=True, null=True)
     hora = models.TimeField(blank=True, null=True)
     asistio = models.BooleanField(default=False)
+    profesional_responsable = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+
+    def __str__(self):
+        return f"{self.paciente} - {self.fecha}"
 
 class informe(models.Model):
     paciente = models.ForeignKey(
         paciente, on_delete=models.CASCADE, blank=True)
     fecha = models.DateField(blank=True, null=True)
     detalle = models.TextField(blank=True)
+    profesional_responsable = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
 
     def __str__(self):
         return f"{self.paciente} - {self.fecha}"
+    

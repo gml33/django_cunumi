@@ -4,6 +4,7 @@ from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from .bot import bot, chat_id
+from .models import paciente
 
 def home(request):
     return render(request, 'webapp/index.html')
@@ -37,7 +38,11 @@ def my_login(request):
 
 @login_required(login_url='my-login')
 def dashboard(request):
-    return render(request, 'webapp/dashboard.html')
+    pacientes = paciente.objects.all()
+    context = {
+        'pacientes':pacientes,
+    }
+    return render(request, 'webapp/dashboard.html', context=context)
 
 
 def user_logout(request):

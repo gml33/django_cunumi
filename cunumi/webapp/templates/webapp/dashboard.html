@@ -1,4 +1,7 @@
 {% extends 'webapp/base.html' %}
 {% block content %}
     <h1>bienvenido {{user}}</h1>
+    {% for paciente in pacientes %}
+        {{paciente.nombre}}-{{paciente.apellido}}
+    {% endfor %}
 {% endblock %}
