@@ -1,8 +1,8 @@
 #paciente
 #historia clinica
-#pago
-#derivacion
 #evolucion
+#derivacion
+#pago
 #turno
 #informe
 
@@ -41,7 +41,7 @@ class paciente(models.Model):
 class historiaClinica(models.Model):
     paciente = models.ForeignKey(
         paciente, on_delete=models.CASCADE, blank=True)
-    fecha = models.DateField(blank=True, null=True)
+    fecha = models.DateField(blank=True)
     detalle = models.TextField(blank=True)
 
     def __str__(self):

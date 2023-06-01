@@ -1,9 +1,10 @@
 import telebot
+import os
 
-TOKEN = '5656652172:AAHTw1LxakGodNTHOfokmqr-aRlgJvPJonw'
+TOKEN = os.environ.get('TOKEN')
 
 bot = telebot.TeleBot(TOKEN)
-channel_id = '779620945'
-chat_id = '779620945'
+channel_id = chat_id = os.environ.get('channel_id')
+chat_id = os.environ.get('chat_id')
 
 #bot.send_message(chat_id, text='Iniciando servidor CUNUMI')
