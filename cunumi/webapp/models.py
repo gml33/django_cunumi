@@ -68,7 +68,6 @@ class derivacion(models.Model):
     fecha = models.DateField(blank=True, null=True)
     motivo = models.TextField(blank=True)
     detalle = models.TextField(blank=True)
-    profesional = models.CharField(max_length=200, blank=True)
     profesional_responsable = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
 
 class factura(models.Model):

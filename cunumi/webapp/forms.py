@@ -39,9 +39,55 @@ class pacienteForm(forms.ModelForm):
         fields = '__all__'
 
 
+class evolucionForm(forms.ModelForm):
 
-class modificarPacienteForm(forms.ModelForm):
+    fecha = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
 
     class Meta:
-        model = paciente
+        model = evolucion
+        fields = '__all__'
+
+
+class derivacionForm(forms.ModelForm):
+
+    fecha = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+
+    class Meta:
+        model = derivacion
+        fields = '__all__'
+
+
+class historiaClinicaForm(forms.ModelForm):
+    fecha = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+
+    class Meta:
+        model = historiaClinica
+        fields = '__all__'
+
+class facturaForm(forms.ModelForm):
+    fecha = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+
+    class Meta:
+        model = factura
+        fields = '__all__'
+
+class pagoForm(forms.ModelForm):
+    fecha = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+
+    class Meta:
+        model = pago
+        fields = '__all__'
+
+class turnoForm(forms.ModelForm):
+    fecha = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+
+    class Meta:
+        model = turno
+        fields = '__all__'
+
+class informeForm(forms.ModelForm):
+    fecha = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+
+    class Meta:
+        model = informe
         fields = '__all__'

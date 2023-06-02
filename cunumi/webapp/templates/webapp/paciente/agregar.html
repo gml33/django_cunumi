@@ -5,15 +5,14 @@
 {% block content %}
 
 <div class="container bg-light shadow-md p-5 form-layout">
-    <h3>Actualizar Paciente</h3>
-    <h6>Agregue los detalles del paciente</h6>
+    <h3>Agregar Paciente</h3>
     <hr>
     <br>
     <form method="POST" autocomplete="off" >
         {% csrf_token %}
         {{form|crispy}}
         <br>
-        <button type="submit" class="btn btn-primary w-100 btn-block p-2">Aceptar</button>
+        <button type="submit" class="btn btn-primary w-100 btn-block p-2">Agregar</button>
     </form>
 </div>
 
