@@ -19,12 +19,13 @@ class paciente(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100, blank=True)
     dni = models.CharField(max_length=100, blank=True)
+    telefono = models.CharField(max_length=100, blank=True)
+    email = models.EmailField(blank=True)
     edad = models.IntegerField(blank=True)
     fecha_inicio = models.DateField(blank=True, null=True)
     responables = models.CharField(max_length=200, blank=True)
     motivo_consulta = models.CharField(max_length=200, blank=True)
     derivado = models.BooleanField(default=False)
-    telefono = models.CharField(max_length=100, blank=True)
     email = models.EmailField(blank=True)
     estado_choices = (
         ('activo', 'activo'),
