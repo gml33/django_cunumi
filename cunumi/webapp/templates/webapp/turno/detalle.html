@@ -1,0 +1,26 @@
+{% extends 'webapp/base.html' %}
+{% block content %}
+        <div class="card">
+            <strong>
+                <br>
+                &nbsp;
+                &nbsp;
+                {{derivacion.id}}
+                {{derivacion.fecha}}
+            </strong>
+            <hr>
+            <div class="card-body">
+                <p><strong>ID: </strong>{{derivacion.id}}</p>
+                <p><strong>Paciente:</strong>{{derivacion.paciente}}</p>
+                <p><strong>Motivo: </strong>{{derivacion.motivo}}</p>
+                <p><strong>Detalle: </strong>{{derivacion.detalle}}</p>
+                <p><strong>Profesional Responsable: </strong>{{paciente.profesional_responsable}}</p>
+            </div>
+        </div>
+        <br>
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Volver</a>
+        &nbsp;
+        <a href="{% url 'modificar_derivacion' derivacion.id %}" class="btn btn-primary">Modificar</a>
+        &nbsp;
+        <a href="{% url 'eliminar_derivacion' derivacion.id %}" class="btn btn-danger">Eliminar</a>
+{% endblock %}

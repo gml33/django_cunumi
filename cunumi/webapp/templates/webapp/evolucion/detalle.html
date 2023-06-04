@@ -1,6 +1,5 @@
 {% extends 'webapp/base.html' %}
 {% block content %}
-
         <div class="card">
             <strong>
                 <br>
@@ -13,16 +12,15 @@
             <div class="card-body">
                 <p><strong>ID: </strong>{{evolucion.id}}</p>
                 <p><strong>Paciente:</strong>{{evolucion.paciente}}</p>
-                <p><strong>fecha: </strong>{{fecha.motivo}}</p>
+                <p><strong>Fecha: </strong>{{evolucion.fecha}}</p>
                 <p><strong>Detalle: </strong>{{evolucion.detalle}}</p>
                 <p><strong>Profesional Responsable: </strong>{{paciente.profesional_responsable}}</p>
             </div>
         </div>
         <br>
-        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Volver</a>
+        <a href="{% url 'listar_evoluciones' %}" class="btn btn-secondary">Volver</a>
         &nbsp;
         <a href="{% url 'modificar_evolucion' evolucion.id %}" class="btn btn-primary">Modificar</a>
         &nbsp;
         <a href="{% url 'eliminar_evolucion' evolucion.id %}" class="btn btn-danger">Eliminar</a>
-
 {% endblock %}

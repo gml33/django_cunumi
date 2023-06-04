@@ -48,8 +48,8 @@ class informeAdmin(admin.ModelAdmin):
     list_per_page = 50
 
 class facturaAdmin(admin.ModelAdmin):
-    list_display = ["paciente", 'fecha', 'monto', 'numero']
-    search_fields = ["paciente", "fecha", 'monto', 'numero']
+    list_display = ["paciente", 'fecha', 'monto', 'identificador']
+    search_fields = ["paciente", "fecha", 'monto', 'identificador']
     list_filter = ['paciente', 'fecha']
     list_per_page = 50
 

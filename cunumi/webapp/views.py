@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CreateUserForm, LoginForm, pacienteForm, pacienteForm, historiaClinicaForm, evolucionForm, derivacionForm
+from .forms import CreateUserForm, LoginForm, pacienteForm, pacienteForm, historiaClinicaForm, evolucionForm, derivacionForm, facturaForm, pagoForm, turnoForm, informeForm
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required, permission_required
 from .bot import bot, chat_id
-from .models import paciente,historiaClinica, evolucion, derivacion
+from .models import paciente,historiaClinica, evolucion, derivacion, factura, pago ,turno, informe
 from django.contrib import messages
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -104,17 +104,17 @@ def agregar_historiaClinica(request):
         if formulario.is_valid():
             formulario.save()
             messages.success(request, "historiaClinica agregada correctamente")
-            return redirect(to="webapp:listar_historiaClinicas")
+            return redirect(to="listar_historiasClinicas")
         else:
             data["form"] = formulario
     return render(request, 'webapp/historiaClinica/agregar.html', data)
 
 
 @permission_required('webapp.view_historiaClinica')
-def listar_historiaClinicas(request):
-    historiaClinicas = historiaClinica.objects.all().order_by('fecha')
+def listar_historiasClinicas(request):
+    historiasClinicas = historiaClinica.objects.all().order_by('fecha')
     data = {
-        'historiaClinicas': historiaClinicas
+        'historiasClinicas': historiasClinicas
     }
     return render(request, 'webapp/historiaClinica/listar.html', data)
 
@@ -143,7 +143,7 @@ def modificar_historiaClinica(request, id):
             formulario.save()
             messages.success(
                 request, "historiaClinica modificada correctamente")
-            return redirect(to="webapp:listar_historiaClinicas")
+            return redirect(to="listar_historiasClinicas")
         else:
             data["form"] = formulario
 
@@ -155,7 +155,7 @@ def eliminar_historiaClinica(request, id):
     historiaClinicaVar = get_object_or_404(historiaClinica, pk=id)
     historiaClinicaVar.delete()
     messages.success(request, "historiaClinica eliminada correctamente")
-    return redirect(to="webapp:listar_historiaClinicas")
+    return redirect(to="listar_historiasClinicas")
 
 # ------------evoluciones-----------------------------------
 
@@ -196,12 +196,12 @@ def detalle_evolucion(request, id):
 
 @permission_required('webapp.change_evolucion')
 def modificar_evolucion(request, id):
-    evolucion = get_object_or_404(evolucion, pk=id)
+    evolucion_seleccionada = get_object_or_404(evolucion, pk=id)
     data = {
-        'form': evolucionForm(instance=evolucion)
+        'form': evolucionForm(instance=evolucion_seleccionada)
     }
     if request.method == 'POST':
-        formulario = evolucionForm(data=request.POST, instance=evolucion)
+        formulario = evolucionForm(data=request.POST, instance=evolucion_seleccionada)
         if formulario.is_valid():
             formulario.save()
             messages.success(request, "evolucion modificado correctamente")
@@ -213,9 +213,9 @@ def modificar_evolucion(request, id):
 
 @permission_required('webapp.delete_evolucion')
 def eliminar_evolucion(request, id):
-    evolucion = get_object_or_404(evolucion, id=id)
-    evolucion.delete()
-    messages.success(request, "evolucion eliminado correctamente")
+    evolucion_seleccionada = get_object_or_404(evolucion, id=id)
+    evolucion_seleccionada.delete()
+    messages.success(request, "evolucion eliminada correctamente")
     return redirect(to="listar_evoluciones")
 
     # ------------------------derivaciones-----------------------------------
@@ -285,3 +285,64 @@ def eliminar_derivacion(request, id):
     messages.success(request, "derivacion eliminada correctamente")
     return redirect(to="listar_derivaciones")
 
+# ---------------------------facturas--------------------------------
+@permission_required('webapp.add_factura')
+def agregar_factura(request):
+    data = {
+        'form': facturaForm()
+    }
+    if request.method == 'POST':
+        formulario = facturaForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Factura agregada correctamente")
+            return redirect(to="listar_facturas")
+        else:
+            data["form"] = formulario
+    return render(request, 'webapp/factura/agregar.html', data)
+
+
+@permission_required('webapp.view_factura')
+def listar_facturas(request):
+    facturas = factura.objects.all().order_by('fecha')
+    data = {
+        'facturas': facturas
+    }
+    return render(request, 'webapp/factura/listar.html', data)
+
+
+@permission_required('webapp.view_factura')
+def detalle_factura(request, id):
+    facturaVar = get_object_or_404(factura, id=id)
+    data = {
+        'factura': facturaVar,
+    }
+    return render(request, 'webapp/factura/detalle.html', data)
+
+
+@permission_required('webapp.change_factura')
+def modificar_factura(request, id):
+    facturaVar = get_object_or_404(factura, id=id)
+    data = {
+        'form': facturaForm(instance=facturaVar)
+    }
+    if request.method == 'POST':
+        formulario = facturaForm(
+            data=request.POST, instance=facturaVar)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(
+                request, "Factura modificada correctamente")
+            return redirect(to="listar_facturas")
+        else:
+            data["form"] = formulario
+
+    return render(request, 'webapp/factura/modificar.html', data)
+
+
+@permission_required('webapp.delete_factura')
+def eliminar_factura(request, id):
+    facturaVar = get_object_or_404(factura, pk=id)
+    facturaVar.delete()
+    messages.success(request, "Factura eliminada correctamente")
+    return redirect(to="listar_facturas")

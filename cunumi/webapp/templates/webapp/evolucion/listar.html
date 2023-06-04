@@ -1,7 +1,7 @@
 {% extends 'webapp/base.html' %}
 {% block content %}
 <a class="btn btn-outline-primary btn-small" href="{% url 'agregar_evolucion' %}">
-  Agregar Evolucion
+    Agregar evolucion
 </a>
 <hr>
     <table class="table table-hover table-bordered">
@@ -10,7 +10,6 @@
                 <th scope="col">ID</th>
                 <th scope="col">Paciente</th>
                 <th scope="col">fecha</th>
-                <th scope="col">motivo</th>
                 <th scope="col">detalle</th>
                 <th scope="col">Profesional Responsable</th>
                 <th scope="col">Ver</th>
@@ -23,8 +22,7 @@
                 <td>{{evolucion.id}}</td>
                 <td>{{evolucion.paciente}}</td>
                 <td>{{evolucion.fecha}}</td>
-                <td>{{evolucion.motivo}}</td>
-                <td>{{evolucion.detalle}}</td>
+                <td>{{evolucion.detalle|truncatechars:15}}</td>
                 <td>{{evolucion.profesional_responsable}}</td>
                 <td><a href="{% url 'detalle_evolucion' evolucion.id %}">detalle</a></td>
             </tr>

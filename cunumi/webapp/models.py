@@ -74,7 +74,7 @@ class factura(models.Model):
     paciente = models.ForeignKey(paciente, on_delete=models.CASCADE, blank=True)
     fecha = models.DateField(blank=True, null=True)
     monto = models.IntegerField(blank=True)
-    numero = models.IntegerField(blank=True)
+    identificador = models.IntegerField(blank=True)
 
     def __str__(self):
         return f"{self.numero} - {self.fecha}"
