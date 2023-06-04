@@ -12,13 +12,13 @@ urlpatterns = [
     path('eliminar-paciente/<int:pk>', views.eliminar_paciente, name='eliminar-paciente'),
     path('modificar-paciente/<int:pk>', views.modificar_paciente, name='modificar-paciente'),
     path('detalle-paciente/<int:pk>', views.detalle_paciente, name='detalle-paciente'),
-    #------------------------paciente--------------------------------# ------------historiaClinicas----------------------------
+   #-------------------------historiaClinicas------------------------
     path('agregar-historiaClinica/', views.agregar_historiaClinica,name='agregar_historiaClinica'),
     path('detalle-historiaClinica/<id>/', views.detalle_historiaClinica, name='detalle_historiaClinica'),
     path('listar-historiaClinicas/',  views.listar_historiaClinicas, name='listar_historiaClinicas'),
     path('modificar-historiaClinica/<id>/', views.modificar_historiaClinica, name='modificar_historiaClinica'),
     path('eliminar-historiaClinica/<id>/', views.eliminar_historiaClinica, name='eliminar_historiaClinica'),
-    # ------------evoluciones----------------------------
+    # -----------------------evoluciones-----------------------------
     path('agregar-evolucion/',  views.agregar_evolucion, name='agregar_evolucion'),
     path('detalle-evolucion/<id>/',  views.detalle_evolucion, name='detalle_evolucion'),
     path('listar-evoluciones/',  views.listar_evoluciones, name='listar_evoluciones'),

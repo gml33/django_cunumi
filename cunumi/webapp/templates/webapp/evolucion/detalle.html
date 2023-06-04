@@ -1,12 +1,28 @@
-{% extends "gestion/layout.html" %} {% block body %}
-<br>
-<div class="card">
-  <div class="card-body">
-    <h3 class="card-title">Detalle</h3>
-    <h5 class="card-title">Fecha: {{evolucion.fecha}}</h5>
-    <p>{{evolucion.detalle}}</p>
-    <a href="{% url 'gestion:listar_evoluciones' %}" class="btn btn-success"
-      >Volver</a>
-  </div>
-</div>
+{% extends 'webapp/base.html' %}
+{% block content %}
+
+        <div class="card">
+            <strong>
+                <br>
+                &nbsp;
+                &nbsp;
+                {{evolucion.id}}
+                {{evolucion.fecha}}
+            </strong>
+            <hr>
+            <div class="card-body">
+                <p><strong>ID: </strong>{{evolucion.id}}</p>
+                <p><strong>Paciente:</strong>{{evolucion.paciente}}</p>
+                <p><strong>fecha: </strong>{{fecha.motivo}}</p>
+                <p><strong>Detalle: </strong>{{evolucion.detalle}}</p>
+                <p><strong>Profesional Responsable: </strong>{{paciente.profesional_responsable}}</p>
+            </div>
+        </div>
+        <br>
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Volver</a>
+        &nbsp;
+        <a href="{% url 'modificar_evolucion' evolucion.id %}" class="btn btn-primary">Modificar</a>
+        &nbsp;
+        <a href="{% url 'eliminar_evolucion' evolucion.id %}" class="btn btn-danger">Eliminar</a>
+
 {% endblock %}

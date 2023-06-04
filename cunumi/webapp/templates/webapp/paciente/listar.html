@@ -1,65 +1,32 @@
-{% extends "gestion/layout.html" %} {% block body %} {% load crispy_forms_tags%}
-{% if pacientes %}
+{% extends 'webapp/base.html' %}
+{% block content %}
 
-<script>
-  function eliminarNetbook(id) {
-    Swal.fire({
-      title: "Confirmar Operación",
-      text: "Esta acción no se puede deshacer",
-      icon: "question",
-      showCancelButton: true,
-    }).then(function (result) {
-      if (result.isConfirmed) {
-        window.location.href = "/eliminar-paciente/" + id + "/";
-      }
-    });
-  }
-</script>
-<br>
-<div class="pacientes_inicio">
-  <card class="card-body">
-    <h2>Pacientes</h2>
-    <table class="table table-striped table-hover table-responsive-sm">
-      <tr>
-        <th>Nombre</th>
-        <th>Edad</th>
-        <th>Fecha Ingreso</th>
-        <th>Estado</th>
-        <th>Opciones</th>
-      </tr>
-      {% for paciente in pacientes %}
-      <tr>
-        <td>{{paciente.nombre}} {{paciente.apellido}}</td>
-        <td>{{paciente.edad}}</td>
-        <td>{{paciente.fecha_ingreso}}</td>
-        <td>{{paciente.estado}}</td>
-        <td>
-          <a
-            href="{% url 'gestion:detalle_paciente' paciente.id %}"
-            class="fas fa-eye"
-          ></a>
-          {% if perms.api.change_paciente %}
-          <a> - </a>
-          <a
-            href="{% url 'gestion:modificar_paciente' paciente.id %}"
-            class="fas fa-pen"
-          ></a>
-          {% endif %} {% if perms.api.delete_paciente %}
-          <a> - </a>
-          <a
-            href="#"
-            class="far fa-trash-alt"
-            onclick="eliminarPaciente({{paciente.id}})"
-          ></a>
-          {% endif %}
-        </td>
-      </tr>
-      {% endfor %}
+    <table class="table table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Profesional Responsable</th>
+                <th scope="col">Ver</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if pacientes %}
+            {% for paciente in pacientes %}
+            <tr>
+                <td>
+                    {{paciente.id}}
+                </td>
+                <td>{{paciente.nombre}} {{paciente.apellido}}</td>
+                <td>{{paciente.telefono}}</td>
+                <td>{{paciente.estado}}</td>
+                <td>{{paciente.profesional_responsable}}</td>
+                <td><a href="{% url 'detalle-paciente' paciente.id %}">detalle</a></td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody>
     </table>
-  </card>
-</div>
-
-{% else %}
-<h2>No hay Pacientes registrados</h2>
-<br />
-{% endif %} {% endblock %}
+{% endblock %}

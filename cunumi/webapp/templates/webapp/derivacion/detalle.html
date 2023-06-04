@@ -1,21 +1,28 @@
-{% extends "gestion/layout.html" %} {% block body %}
-<br>
-  <div class="card">
-    <div class="card-body">
-      <h3 class="card-title">Detalle de la derivación</h3>
-      <h5 class="card-title">
-        Nombre: {{derivacion.paciente}} -- {{derivacion.fecha}}
-      </h5>
-      <div class="card-body">
-        <h3>Motivo:</h3>
-        <h4>{{derivacion.motivo}}</h4>
-        <br />
-        <h3>Profesional al que se deriva:</h3>
-        <h4>{{derivacion.profesional}}</h4>
-      </div>
-      <a href="{% url 'gestion:listar_derivaciones' %}" class="btn btn-success"
-        >Volver</a
-      >
-    </div>
-  </div>
+{% extends 'webapp/base.html' %}
+{% block content %}
+
+        <div class="card">
+            <strong>
+                <br>
+                &nbsp;
+                &nbsp;
+                {{derivacion.id}}
+                {{derivacion.fecha}}
+            </strong>
+            <hr>
+            <div class="card-body">
+                <p><strong>ID: </strong>{{derivacion.id}}</p>
+                <p><strong>Paciente:</strong>{{derivacion.paciente}}</p>
+                <p><strong>Motivo: </strong>{{derivacion.motivo}}</p>
+                <p><strong>Detalle: </strong>{{derivacion.detalle}}</p>
+                <p><strong>Profesional Responsable: </strong>{{paciente.profesional_responsable}}</p>
+            </div>
+        </div>
+        <br>
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Volver</a>
+        &nbsp;
+        <a href="{% url 'modificar-derivacion' derivacion.id %}" class="btn btn-primary">Modificar</a>
+        &nbsp;
+        <a href="{% url 'eliminar-derivacion' derivacion.id %}" class="btn btn-danger">Eliminar</a>
+
 {% endblock %}
