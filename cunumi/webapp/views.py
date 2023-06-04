@@ -268,7 +268,7 @@ def modificar_derivacion(request, id):
     }
     if request.method == 'POST':
         formulario = derivacionForm(data=request.POST, instance=derivacionVar)
-        if formulario.is_valid(commit=False):
+        if formulario.is_valid():
             formulario.save()
             messages.success(request, "derivacion modificada correctamente")
             return redirect(to="listar_derivaciones")

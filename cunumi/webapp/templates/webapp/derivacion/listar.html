@@ -1,6 +1,9 @@
 {% extends 'webapp/base.html' %}
 {% block content %}
-
+<a class="btn btn-outline-primary btn-small" href="{% url 'agregar_derivacion' %}">
+    Agregar Derivacion
+</a>
+<hr>
     <table class="table table-hover table-bordered">
         <thead class="table-light">
             <tr>
@@ -20,8 +23,8 @@
                 <td>{{derivacion.id}}</td>
                 <td>{{derivacion.paciente}}</td>
                 <td>{{derivacion.fecha}}</td>
-                <td>{{derivacion.motivo}}</td>
-                <td>{{derivacion.detalle}}</td>
+                <td>{{derivacion.motivo|truncatechars:15}}</td>
+                <td>{{derivacion.detalle|truncatechars:15}}</td>
                 <td>{{derivacion.profesional_responsable}}</td>
                 <td><a href="{% url 'detalle_derivacion' derivacion.id %}">detalle</a></td>
             </tr>
