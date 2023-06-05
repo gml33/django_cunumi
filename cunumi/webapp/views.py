@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CreateUserForm, LoginForm, pacienteForm, pacienteForm, historiaClinicaForm, evolucionForm, derivacionForm, facturaForm, pagoForm, turnoForm, informeForm
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required
 from .bot import bot, chat_id
 from .models import paciente,historiaClinica, evolucion, derivacion, factura, pago ,turno, informe
 from django.contrib import messages
