@@ -94,7 +94,7 @@ def detalle_paciente(request, pk):
     return render(request, 'webapp/paciente/detalle.html', context=context)
 
 # ------------historiaClinicas-------------------------------------------
-@permission_required('webapp.add_historiaClinica')
+@login_required(login_url='my-login')
 def agregar_historiaClinica(request):
     data = {
         'form': historiaClinicaForm()
@@ -110,7 +110,7 @@ def agregar_historiaClinica(request):
     return render(request, 'webapp/historiaClinica/agregar.html', data)
 
 
-@permission_required('webapp.view_historiaClinica')
+@login_required(login_url='my-login')
 def listar_historiasClinicas(request):
     historiasClinicas = historiaClinica.objects.all().order_by('fecha')
     data = {
@@ -119,7 +119,7 @@ def listar_historiasClinicas(request):
     return render(request, 'webapp/historiaClinica/listar.html', data)
 
 
-@permission_required('webapp.view_historiaClinica')
+@login_required(login_url='my-login')
 def detalle_historiaClinica(request, id):
     historiaClinicaVar = get_object_or_404(historiaClinica, id=id)
     #pacienteVar = paciente.objects.filter(historiaClinica=historiaClinica).order_by('fecha')
@@ -130,7 +130,7 @@ def detalle_historiaClinica(request, id):
     return render(request, 'webapp/historiaClinica/detalle.html', data)
 
 
-@permission_required('webapp.change_historiaClinica')
+@login_required(login_url='my-login')
 def modificar_historiaClinica(request, id):
     historiaClinicaVar = get_object_or_404(historiaClinica, id=id)
     data = {
@@ -150,7 +150,7 @@ def modificar_historiaClinica(request, id):
     return render(request, 'webapp/historiaClinica/modificar.html', data)
 
 
-@permission_required('webapp.delete_historiaClinica')
+@login_required(login_url='my-login')
 def eliminar_historiaClinica(request, id):
     historiaClinicaVar = get_object_or_404(historiaClinica, pk=id)
     historiaClinicaVar.delete()
@@ -160,7 +160,7 @@ def eliminar_historiaClinica(request, id):
 # ------------evoluciones-----------------------------------
 
 
-@permission_required('webapp.add_evolucion')
+@login_required(login_url='my-login')
 def agregar_evolucion(request):
     data = {
         'form': evolucionForm()
@@ -176,7 +176,7 @@ def agregar_evolucion(request):
     return render(request, 'webapp/evolucion/agregar.html', data)
 
 
-@permission_required('webapp.view_evolucion')
+@login_required(login_url='my-login')
 def listar_evoluciones(request):
     evoluciones = evolucion.objects.all().order_by('fecha')
     data = {
@@ -185,7 +185,7 @@ def listar_evoluciones(request):
     return render(request, 'webapp/evolucion/listar.html', data)
 
 
-@permission_required('webapp.view_evolucion')
+@login_required(login_url='my-login')
 def detalle_evolucion(request, id):
     evolucionVar = evolucion.objects.get(id=id)
     data = {
@@ -194,7 +194,7 @@ def detalle_evolucion(request, id):
     return render(request, 'webapp/evolucion/detalle.html', data)
 
 
-@permission_required('webapp.change_evolucion')
+@login_required(login_url='my-login')
 def modificar_evolucion(request, id):
     evolucion_seleccionada = get_object_or_404(evolucion, pk=id)
     data = {
@@ -211,7 +211,7 @@ def modificar_evolucion(request, id):
     return render(request, 'webapp/evolucion/modificar.html', data)
 
 
-@permission_required('webapp.delete_evolucion')
+@login_required(login_url='my-login')
 def eliminar_evolucion(request, id):
     evolucion_seleccionada = get_object_or_404(evolucion, id=id)
     evolucion_seleccionada.delete()
@@ -221,7 +221,7 @@ def eliminar_evolucion(request, id):
     # ------------------------derivaciones-----------------------------------
 
 
-@permission_required('webapp.add_derivacion')
+@login_required(login_url='my-login')
 def agregar_derivacion(request):
     derivacion = []
     data = {
@@ -242,7 +242,7 @@ def agregar_derivacion(request):
     return render(request, 'webapp/derivacion/agregar.html', data)
 
 
-@permission_required('webapp.view_derivacion')
+@login_required(login_url='my-login')
 def listar_derivaciones(request):
     derivaciones = derivacion.objects.all().order_by('fecha')
     data = {
@@ -251,7 +251,7 @@ def listar_derivaciones(request):
     return render(request, 'webapp/derivacion/listar.html', data)
 
 
-@ permission_required('webapp.view_derivacion')
+@login_required(login_url='my-login')
 def detalle_derivacion(request, id):
     derivacionVar = get_object_or_404(derivacion, id=id)
     data = {
@@ -260,7 +260,7 @@ def detalle_derivacion(request, id):
     return render(request, 'webapp/derivacion/detalle.html', data)
 
 
-@ permission_required('webapp.change_derivacion')
+@login_required(login_url='my-login')
 def modificar_derivacion(request, id):
     derivacionVar = get_object_or_404(derivacion, id=id)
     data = {
@@ -278,7 +278,7 @@ def modificar_derivacion(request, id):
     return render(request, 'webapp/derivacion/modificar.html', data)
 
 
-@ permission_required('webapp.delete_derivacion')
+@login_required(login_url='my-login')
 def eliminar_derivacion(request, id):
     derivacionVar = get_object_or_404(derivacion, id=id)
     derivacionVar.delete()
@@ -286,7 +286,7 @@ def eliminar_derivacion(request, id):
     return redirect(to="listar_derivaciones")
 
 # ---------------------------facturas--------------------------------
-@permission_required('webapp.add_factura')
+@login_required(login_url='my-login')
 def agregar_factura(request):
     data = {
         'form': facturaForm()
@@ -302,7 +302,7 @@ def agregar_factura(request):
     return render(request, 'webapp/factura/agregar.html', data)
 
 
-@permission_required('webapp.view_factura')
+@login_required(login_url='my-login')
 def listar_facturas(request):
     facturas = factura.objects.all().order_by('fecha')
     data = {
@@ -311,7 +311,7 @@ def listar_facturas(request):
     return render(request, 'webapp/factura/listar.html', data)
 
 
-@permission_required('webapp.view_factura')
+@login_required(login_url='my-login')
 def detalle_factura(request, id):
     facturaVar = get_object_or_404(factura, id=id)
     data = {
@@ -320,7 +320,7 @@ def detalle_factura(request, id):
     return render(request, 'webapp/factura/detalle.html', data)
 
 
-@permission_required('webapp.change_factura')
+@login_required(login_url='my-login')
 def modificar_factura(request, id):
     facturaVar = get_object_or_404(factura, id=id)
     data = {
@@ -340,7 +340,7 @@ def modificar_factura(request, id):
     return render(request, 'webapp/factura/modificar.html', data)
 
 
-@permission_required('webapp.delete_factura')
+@login_required(login_url='my-login')
 def eliminar_factura(request, id):
     facturaVar = get_object_or_404(factura, pk=id)
     facturaVar.delete()
