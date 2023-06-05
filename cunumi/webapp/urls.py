@@ -1,8 +1,6 @@
 from django.urls import path
 from . import views
 
-app_name = 'webapp'
-
 urlpatterns = [
     path('',views.home,name=''),
     path('register',views.register, name='register'),
@@ -10,10 +8,11 @@ urlpatterns = [
     path('user-logout',views.user_logout, name='user-logout'),
     path('dashboard',views.dashboard, name='dashboard'),
     #------------------------paciente--------------------------------
-    path('crear-paciente', views.agregar_paciente, name='crear-paciente'),
-    path('eliminar-paciente/<int:pk>', views.eliminar_paciente, name='eliminar-paciente'),
-    path('modificar-paciente/<int:pk>', views.modificar_paciente, name='modificar-paciente'),
-    path('detalle-paciente/<int:pk>', views.detalle_paciente, name='detalle-paciente'),
+    path('agregar-paciente', views.agregar_paciente, name='agregar_paciente'),
+    path('detalle-paciente/<int:pk>', views.detalle_paciente, name='detalle_paciente'),
+    path('eliminar-paciente/<int:pk>', views.eliminar_paciente, name='eliminar_paciente'),
+    path('modificar-paciente/<int:pk>', views.modificar_paciente, name='modificar_paciente'),
+
     # -----------------------derivaciones---------------------------------
     path('agregar-derivacion/',  views.agregar_derivacion, name='agregar_derivacion'),
     path('detalle-derivacion/<id>/',  views.detalle_derivacion, name='detalle_derivacion'),

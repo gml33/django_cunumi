@@ -2,6 +2,7 @@
 #historia clinica
 #evolucion
 #derivacion
+#factura
 #pago
 #turno
 #informe
@@ -31,8 +32,7 @@ class paciente(models.Model):
         ('activo', 'activo'),
         ('inactivo', 'inactivo'),
         ('alta', 'alta'),
-        ('derivado', 'derivado')
-    )
+        ('derivado', 'derivado'))
     estado = models.CharField(max_length=20, choices=estado_choices, default='activo')
     profesional_responsable = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
 
@@ -42,10 +42,10 @@ class paciente(models.Model):
 
 class historiaClinica(models.Model):
     paciente = models.ForeignKey(
-        paciente, on_delete=models.CASCADE, blank=True)
+        paciente, on_delete=models.CASCADE, blank=False)
     fecha = models.DateField(blank=True)
     detalle = models.TextField(blank=True)
-    profesional_responsable = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    profesional_responsable = models.ForeignKey(User, on_delete=models.CASCADE, blank=False)
 
     def __str__(self):
         return f"{self.paciente} - {self.fecha}"
@@ -53,10 +53,10 @@ class historiaClinica(models.Model):
 
 class evolucion(models.Model):
     paciente = models.ForeignKey(
-        paciente, on_delete=models.CASCADE, blank=True)
+        paciente, on_delete=models.CASCADE, blank=False)
     fecha = models.DateField(blank=True, null=True)
     detalle = models.TextField(blank=True)
-    profesional_responsable = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    profesional_responsable = models.ForeignKey(User, on_delete=models.CASCADE, blank=False)
 
     def __str__(self):
         return f"{self.paciente} - {self.fecha}"
@@ -64,11 +64,11 @@ class evolucion(models.Model):
 
 class derivacion(models.Model):
     paciente = models.ForeignKey(
-        paciente, on_delete=models.CASCADE, blank=True)
+        paciente, on_delete=models.CASCADE, blank=False)
     fecha = models.DateField(blank=True, null=True)
     motivo = models.TextField(blank=True)
     detalle = models.TextField(blank=True)
-    profesional_responsable = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    profesional_responsable = models.ForeignKey(User, on_delete=models.CASCADE, blank=False)
 
 class factura(models.Model):
     paciente = models.ForeignKey(paciente, on_delete=models.CASCADE, blank=True)
@@ -88,13 +88,11 @@ class pago(models.Model):
                       ('informe','informe'),
                       ('psicotecnico','psicotecnico'),
                       ('peritaje','peritaje'),
-                      ('apto','apto')
-                      )
+                      ('apto','apto'))
     motivo= models.CharField(max_length=20, choices=motivo_choices, default='consulta')
     estado_choices = (
         ('pendiente', 'pendiente'),
-        ('saldado', 'saldado')
-    )
+        ('saldado', 'saldado'))
     estado = models.CharField(max_length=20, choices=estado_choices, default='pendiente')
     factura = models.ForeignKey(factura, on_delete=models.CASCADE, blank=True)
 

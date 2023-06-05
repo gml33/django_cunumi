@@ -63,7 +63,7 @@ def agregar_paciente(request):
     context = {
         'form':form
     }
-    return render(request, 'webapp/paciente/agrgar.html', context=context)
+    return render(request, 'webapp/paciente/agregar.html', context=context)
 
 @login_required(login_url='my-login')
 def eliminar_paciente(request, pk):

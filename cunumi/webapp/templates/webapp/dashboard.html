@@ -1,6 +1,10 @@
 {% extends 'webapp/base.html' %}
 {% block content %}
     <h5>Bienvenido {{user}}</h5>
+    <hr>
+    <a class="btn btn-outline-primary btn-small" href="{% url 'agregar_paciente' %}">
+        Agregar Paciente
+    </a>
     <hr>    
     
 
@@ -26,7 +30,7 @@
                 <td>{{paciente.telefono}}</td>
                 <td>{{paciente.estado}}</td>
                 <td>{{paciente.profesional_responsable}}</td>
-                <td><a href="{% url 'detalle-paciente' paciente.id %}">detalle</a></td>
+                <td><a href="{% url 'detalle_paciente' paciente.id %}">detalle</a></td>
             </tr>
             {% endfor %}
             {% endif %}
