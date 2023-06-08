@@ -33,7 +33,23 @@
                 <td><a href="{% url 'detalle_paciente' paciente.id %}">detalle</a></td>
             </tr>
             {% endfor %}
-            {% endif %}
+            
         </tbody>
     </table>
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group me-2" role="group" aria-label="First group">
+        {% if pacientes.number != 1 %}
+        <a type="button" class="btn btn-secondary" href="?page=1"><<</a>
+        {% endif %}
+        {% if pacientes.has_previous %}
+        <a type="button" class="btn btn-secondary" href="?page={{pacientes.previous_page_number}}">{{pacientes.previous_page_number}}</a>
+        {% endif %}
+        <a type="button" class="btn btn-secondary" href="?page={{pacientes.number}}">{{pacientes.number}}</a>
+        {% if pacientes.has_next %}
+        <a type="button" class="btn btn-secondary" href="?page={{pacientes.next_page_number}}">{{pacientes.next_page_number}}</a>
+        {% endif %}
+        <a type="button" class="btn btn-secondary" a href="?page={{pacientes.num_pages}}">>></a>
+    </div>
+</div>
+    {% endif %}
 {% endblock %}

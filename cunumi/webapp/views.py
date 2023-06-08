@@ -8,6 +8,7 @@ from .models import paciente,historiaClinica, evolucion, derivacion, factura, pa
 from django.contrib import messages
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 
 def home(request):
     return render(request, 'registro/index.html')
@@ -41,7 +42,10 @@ def my_login(request):
 
 @login_required(login_url='my-login')
 def dashboard(request):
-    pacientes = paciente.objects.all().order_by('-id')
+    pacientes_all = paciente.objects.all()
+    paginator = Paginator(pacientes_all, 2)
+    page = request.GET.get('page')
+    pacientes = paginator.get_page(page)
     context = {
         'pacientes':pacientes,
     }
