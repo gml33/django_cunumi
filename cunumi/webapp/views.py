@@ -43,7 +43,7 @@ def my_login(request):
 @login_required(login_url='my-login')
 def dashboard(request):
     pacientes_all = paciente.objects.all()
-    paginator = Paginator(pacientes_all, 2)
+    paginator = Paginator(pacientes_all, 20)
     page = request.GET.get('page')
     pacientes = paginator.get_page(page)
     context = {

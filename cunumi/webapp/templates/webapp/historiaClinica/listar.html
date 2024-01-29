@@ -21,10 +21,9 @@
             <tr>
                 <td>{{historiaClinica.id}}</td>
                 <td>{{historiaClinica.paciente}}</td>
-                <td>{{historiaClinica.fecha}}</td>
-                <td>{{historiaClinica.motivo|truncatechars:15}}</td>
+                <td>{{historiaClinica.fecha}}</td>                
                 <td>{{historiaClinica.detalle|truncatechars:15}}</td>
-                <td>{{historiaClinica.profesional_responsable}}</td>
+                <td>{{historiaClinica.profesional_responsable|truncatechars:15}}</td>
                 <td><a href="{% url 'detalle_historiaClinica' historiaClinica.id %}">detalle</a></td>
             </tr>
             {% endfor %}
