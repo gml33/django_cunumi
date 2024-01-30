@@ -5,22 +5,21 @@
                 <br>
                 &nbsp;
                 &nbsp;
-                {{derivacion.id}}
-                {{derivacion.fecha}}
+                Dia: {{turno.fecha}} || Hora: {{turno.hora}}
             </strong>
             <hr>
             <div class="card-body">
-                <p><strong>ID: </strong>{{derivacion.id}}</p>
-                <p><strong>Paciente:</strong>{{derivacion.paciente}}</p>
-                <p><strong>Motivo: </strong>{{derivacion.motivo}}</p>
-                <p><strong>Detalle: </strong>{{derivacion.detalle}}</p>
-                <p><strong>Profesional Responsable: </strong>{{paciente.profesional_responsable}}</p>
+                <p><strong>ID: </strong>{{turno.id}}</p>
+                <p><strong>Paciente:</strong>{{turno.paciente}}</p>
+                <p><strong>Fecha: </strong>{{turno.fecha}}</p>
+                <p><strong>Asistió: </strong>{{turno.asistio}}</p>
+                <p><strong>Profesional Responsable: </strong>{{turno.profesional_responsable}}</p>
             </div>
         </div>
         <br>
         <a href="{% url 'dashboard' %}" class="btn btn-secondary">Volver</a>
         &nbsp;
-        <a href="{% url 'modificar_derivacion' derivacion.id %}" class="btn btn-primary">Modificar</a>
+        <a href="{% url 'modificar_turno' turno.id %}" class="btn btn-primary">Modificar</a>
         &nbsp;
-        <a href="{% url 'eliminar_derivacion' derivacion.id %}" class="btn btn-danger">Eliminar</a>
+        <a href="{% url 'eliminar_turno' turno.id %}" class="btn btn-danger">Eliminar</a>
 {% endblock %}

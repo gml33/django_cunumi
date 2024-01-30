@@ -37,4 +37,10 @@ urlpatterns = [
     path('listar-facturas/',  views.listar_facturas, name='listar_facturas'),
     path('modificar-factura/<id>/', views.modificar_factura, name='modificar_factura'),
     path('eliminar-factura/<id>/', views.eliminar_factura, name='eliminar_factura'),
+            #-------------------------turnos------------------------
+    path('agregar-turno/', views.agregar_turno,name='agregar_turno'),
+    path('detalle-turno/<id>/', views.detalle_turno, name='detalle_turno'),
+    path('listar-turnos/',  views.listar_turnos, name='listar_turnos'),
+    path('modificar-turno/<id>/', views.modificar_turno, name='modificar_turno'),
+    path('eliminar-turno/<id>/', views.eliminar_turno, name='eliminar_turno'),
     ]

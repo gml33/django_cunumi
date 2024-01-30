@@ -350,3 +350,66 @@ def eliminar_factura(request, id):
     facturaVar.delete()
     messages.success(request, "Factura eliminada correctamente")
     return redirect(to="listar_facturas")
+
+
+# ---------------------------turnos--------------------------------
+@login_required(login_url='my-login')
+def agregar_turno(request):
+    data = {
+        'form': turnoForm()
+    }
+    if request.method == 'POST':
+        formulario = turnoForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "turno agregado correctamente")
+            return redirect(to="listar_turnos")
+        else:
+            data["form"] = formulario
+    return render(request, 'webapp/turno/agregar.html', data)
+
+
+@login_required(login_url='my-login')
+def listar_turnos(request):
+    turnos = turno.objects.all().order_by('fecha')
+    data = {
+        'turnos': turnos
+    }
+    return render(request, 'webapp/turno/listar.html', data)
+
+
+@login_required(login_url='my-login')
+def detalle_turno(request, id):
+    turnoVar = get_object_or_404(turno, id=id)
+    data = {
+        'turno': turnoVar,
+    }
+    return render(request, 'webapp/turno/detalle.html', data)
+
+
+@login_required(login_url='my-login')
+def modificar_turno(request, id):
+    turnoVar = get_object_or_404(turno, id=id)
+    data = {
+        'form': turnoForm(instance=turnoVar)
+    }
+    if request.method == 'POST':
+        formulario = turnoForm(
+            data=request.POST, instance=turnoVar)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(
+                request, "Turno modificado correctamente")
+            return redirect(to="listar_turnos")
+        else:
+            data["form"] = formulario
+
+    return render(request, 'webapp/turno/modificar.html', data)
+
+
+@login_required(login_url='my-login')
+def eliminar_turno(request, id):
+    turnoVar = get_object_or_404(turno, pk=id)
+    turnoVar.delete()
+    messages.success(request, "Turno eliminado correctamente")
+    return redirect(to="listar_turnos")

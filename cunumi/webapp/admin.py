@@ -36,7 +36,7 @@ class pagoAdmin(admin.ModelAdmin):
     list_per_page = 50
 
 class turnoAdmin(admin.ModelAdmin):
-    list_display = ["paciente", 'fecha', 'asistio']
+    list_display = ["paciente", 'fecha', 'hora','disponible', 'asistio']
     search_fields = ["paciente", "fecha"]
     list_filter = ['paciente', 'fecha']
     list_per_page = 50

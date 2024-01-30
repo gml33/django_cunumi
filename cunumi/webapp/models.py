@@ -72,6 +72,21 @@ class derivacion(models.Model):
 
 class factura(models.Model):
     paciente = models.ForeignKey(paciente, on_delete=models.CASCADE, blank=True)
+    mes_choices = (
+        ('Enero','Enero'),
+        ('Febrero','Febrero'),
+        ('Marzo','Marzo'),
+        ('Abril','Abril'),
+        ('Mayo','Mayo'),
+        ('Junio','Junio'),
+        ('Julio','Julio'),
+        ('Agosto','Agosto'),
+        ('Septiembre', 'Septiembre'),
+        ('Octubre','Octubre'),
+        ('Noviembre','Noviembre'),
+        ('Diciembre','Diciembre')
+    )
+    mes = models.CharField(max_length=20, choices=mes_choices, default='Enero')
     fecha = models.DateField(blank=True, null=True)
     monto = models.IntegerField(blank=True)
     identificador = models.IntegerField(blank=True)
@@ -102,7 +117,28 @@ class pago(models.Model):
 class turno(models.Model):
     paciente = models.ForeignKey(paciente, on_delete=models.CASCADE, blank=False)
     fecha = models.DateField(blank=True, null=True)
-    hora = models.TimeField(blank=True, null=True)
+    hora_choices = (
+        ('8:00-8:45','8:00-8:45'),
+        ('8:45-9:30','8:45-9:30'),
+        ('9:30-10:15','9:30-10:15'),
+        ('10:15-11:00','10:15-11:00'),
+        ('11:00-11:45','11:00-11:45'),
+        ('11:45-12:30','11:45-12:30'),
+        ('12:30-13:15','12:30-13:15'),
+        ('13:15-14:00','13:15-14:00'),
+        ('14:00-14:45','14:00-14:45'),
+        ('14:45-15:30','14:45-15:30'),
+        ('15:30-16:15','15:30-16:15'),
+        ('16:15-17:00','16:15-17:00'),
+        ('17:00-17:15','17:00-17:15'),
+        ('17:15-18:30','17:15-18:30'),
+        ('18:30-19:15','18:30-19:15'),
+        ('19:15-20:00','19:15-20:00'),
+        ('20:00-20:45','20:00-20:45'),
+        ('20:45-21:30','20:45-21:30')
+    )
+    hora = models.CharField(max_length=20, choices=hora_choices, default='1')
+    disponible = models.BooleanField(blank=True, default=False)
     asistio = models.BooleanField(default=False)
     profesional_responsable = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
 
