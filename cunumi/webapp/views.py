@@ -13,8 +13,6 @@ from django.core.paginator import Paginator
 def home(request):
     return render(request, 'registro/index.html')
 
-#register view
-
 def register(request):
     form = CreateUserForm()
     if request.method == "POST":
