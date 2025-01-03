@@ -17,11 +17,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -30,7 +28,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'webapp',
     'crispy_forms',
+    'rest_framework',
 ]
+
+AUTH_USER_MODEL = 'webapp.Usuario'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -83,7 +84,7 @@ DATABASES = {
             'USER': 'postgres',
             'PASSWORD': 'bmd',
             'HOST': 'localhost',
-            'PORT': '',
+            'PORT': '5432',
     }
 }
 

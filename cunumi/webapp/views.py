@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CreateUserForm, LoginForm, pacienteForm, pacienteForm, historiaClinicaForm, evolucionForm, derivacionForm, facturaForm, pagoForm, turnoForm, informeForm
+from .forms import LoginForm, pacienteForm, pacienteForm, historiaClinicaForm, evolucionForm, derivacionForm, facturaForm, pagoForm, turnoForm, informeForm, CustomUserCreationForm
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from .bot import bot, chat_id
-from .models import paciente,historiaClinica, evolucion, derivacion, factura, pago ,turno, informe
+from .models import paciente,historiaClinica, evolucion, derivacion, factura, pago ,turno, informe, Usuario
 from django.contrib import messages
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -14,9 +14,9 @@ def home(request):
     return render(request, 'registro/index.html')
 
 def register(request):
-    form = CreateUserForm()
+    form = CustomUserCreationForm()
     if request.method == "POST":
-        form = CreateUserForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('my-login')
@@ -233,7 +233,7 @@ def agregar_derivacion(request):
         formulario = derivacionForm(data=request.POST)
         if formulario.is_valid():
             derivacion = formulario.save(commit=False)
-            derivacion.autor = User.objects.get(pk=request.user.id)
+            derivacion.autor = Usuario.objects.get(pk=request.Usuario.id)
             derivacion.fecha = timezone.now()
             derivacion.status = 'activo'
             derivacion.save()
