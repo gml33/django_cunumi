@@ -9,6 +9,12 @@ from django.contrib import messages
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
+from rest_framework import viewsets
+from .serializers import pacienteSerializer
+
+class pacienteViewset(viewsets.ModelViewSet):
+    queryset = paciente.objects.all()
+    serializer_class = pacienteSerializer
 
 def home(request):
     return render(request, 'registro/index.html')

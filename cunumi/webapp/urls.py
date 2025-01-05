@@ -1,5 +1,12 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
+from .views import pacienteViewset
+
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('paciente', pacienteViewset)
+
 
 urlpatterns = [
     path('',views.home,name=''),
@@ -31,16 +38,18 @@ urlpatterns = [
     path('listar-historiasClinicas/',  views.listar_historiasClinicas, name='listar_historiasClinicas'),
     path('modificar-historiaClinica/<id>/', views.modificar_historiaClinica, name='modificar_historiaClinica'),
     path('eliminar-historiaClinica/<id>/', views.eliminar_historiaClinica, name='eliminar_historiaClinica'),
-        #-------------------------facturas------------------------
+    #-------------------------facturas------------------------
     path('agregar-factura/', views.agregar_factura,name='agregar_factura'),
     path('detalle-factura/<id>/', views.detalle_factura, name='detalle_factura'),
     path('listar-facturas/',  views.listar_facturas, name='listar_facturas'),
     path('modificar-factura/<id>/', views.modificar_factura, name='modificar_factura'),
     path('eliminar-factura/<id>/', views.eliminar_factura, name='eliminar_factura'),
-            #-------------------------turnos------------------------
+    #-------------------------turnos------------------------
     path('agregar-turno/', views.agregar_turno,name='agregar_turno'),
     path('detalle-turno/<id>/', views.detalle_turno, name='detalle_turno'),
     path('listar-turnos/',  views.listar_turnos, name='listar_turnos'),
     path('modificar-turno/<id>/', views.modificar_turno, name='modificar_turno'),
     path('eliminar-turno/<id>/', views.eliminar_turno, name='eliminar_turno'),
+    #------------------------API-----------------------------
+    path('api/v1/', include(router.urls))
     ]
